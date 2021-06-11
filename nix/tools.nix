@@ -36,7 +36,6 @@
   terraform-fmt = callPackage ./terraform-fmt { };
   hpack-dir = callPackage ./hpack-dir { hpack = haskellPackages.hpack; };
   hunspell = callPackage ./hunspell { };
-  jsonnet-fmt = callPackage ./jsonnet-fmt { };
   jsonnet-lint = callPackage ./jsonnet-lint { };
   jsonnet-run = callPackage ./jsonnet-run { };
 }

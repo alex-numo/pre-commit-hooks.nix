@@ -7,7 +7,7 @@ The goal is to **manage commit hooks with Nix** and solve the following:
 - **Trivial integration for Nix projects** (wires up a few things behind the scenes)
 
 - Provide a low-overhead build of all the tooling available for the hooks to use
-   (naive implementation of calling nix-shell does bring some latency when committing)
+  (naive implementation of calling nix-shell does bring some latency when committing)
 
 - **Common hooks for languages** like Python, Haskell, Elm, etc.
 
@@ -23,6 +23,7 @@ The goal is to **manage commit hooks with Nix** and solve the following:
    ```
 
 2. Integrate hooks to be built as part of `default.nix`:
+
    ```nix
     let
       nix-pre-commit-hooks = import (builtins.fetchTarball "https://github.com/cachix/pre-commit-hooks.nix/tarball/master");
@@ -43,6 +44,7 @@ The goal is to **manage commit hooks with Nix** and solve the following:
    Run `$ nix-build -A pre-commit-check` to perform the checks as a Nix derivation.
 
 3. Integrate hooks to prepare environment as part of `shell.nix`:
+
    ```nix
     (import <nixpkgs> {}).mkShell {
        shellHook = ''
@@ -54,7 +56,7 @@ The goal is to **manage commit hooks with Nix** and solve the following:
    Add `/.pre-commit-config.yaml` to `.gitignore`.
 
    Run `$ nix-shell` to execute `shellHook` which will:
-   
+
    - build the tools and `.pre-commit-config.yaml` config file symlink which
      references the binaries, for speed and safe garbage collection
    - provide the `pre-commit` executable that `git commit` will invoke
@@ -115,7 +117,7 @@ eval "$shellHook"
 - [clippy](https://github.com/rust-lang/rust-clippy)
 - cargo-check: Runs `cargo check`
 
-*Warning*: running `clippy` after `cargo check` hides
+_Warning_: running `clippy` after `cargo check` hides
 (https://github.com/rust-lang/rust-clippy/issues/4612) all clippy specific
 errors. Clippy subsumes `cargo check` so only one of these two checks should by
 used at the same time.
@@ -132,6 +134,12 @@ used at the same time.
 
 - `terraform-format`: built-in formatter
 
+## Jsonnet
+
+- [jsonnet-fmt](https://github.com/google/go-jsonnet)
+- [jsonnet-lint](https://github.com/google/go-jsonnet)
+- [jsonnet-run](https://github.com/google/go-jsonnet)
+
 ## Spell checkers
 
 - [hunspell](https://github.com/hunspell/hunspell)
@@ -146,6 +154,7 @@ Sometimes it is useful to add a project specific command as an extra check that
 is not part of the pre-defined set of hooks provided by this project.
 
 Example configuration:
+
 ```nix
  let
    nix-pre-commit-hooks = import (builtins.fetchTarball "https://github.com/cachix/pre-commit-hooks.nix/tarball/master");
@@ -223,13 +232,12 @@ Given the following `flake.nix` example:
 }
 ```
 
-
 Add `/.pre-commit-config.yaml` to the `.gitignore`.
 
 To run the all the hooks on CI:
 
 ```bash
-nix flake check 
+nix flake check
 ```
 
 To install pre-commit hooks developers would run:
@@ -243,6 +251,7 @@ nix develop
 Everyone is encouraged to add new hooks.
 
 <!-- TODO generate option docs -->
+
 Have a look at the [existing hooks](modules/hooks.nix) and the [options](modules/pre-commit.nix).
 
 There's no guarantee the hook will be accepted, but the general guidelines are:

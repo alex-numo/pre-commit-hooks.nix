@@ -252,7 +252,7 @@ in
         {
           name = "jsonnet formatter";
           description = "the standard jsonnet formatter";
-          entry = "${tools.jsonnet-fmt}/bin/jsonnet-fmt";
+          entry = "${tools.go-jsonnet}/bin/jsonnetfmt --in-place --test";
           types = [ "jsonnet" ];
         };
       jsonnet-lint =
@@ -268,6 +268,9 @@ in
           description = "tests jsonnet against files. useful for jsonnet acceptance tests.";
           entry = "${tools.jsonnet-run}/bin/jsonnet-run";
           types = [ "jsonnet" ];
+          raw = {
+            require_serial = true;
+          };
         };
     };
 }

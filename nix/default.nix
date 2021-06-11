@@ -15,6 +15,11 @@ let
       inherit (pkgs) nixfmt niv ormolu nixpkgs-fmt nix-linter;
       cabal-fmt = pkgs.haskell.lib.enableSeparateBinOutput pkgs.haskellPackages.cabal-fmt;
       hindent = pkgs.haskell.lib.enableSeparateBinOutput pkgs.haskellPackages.hindent;
+      go-jsonnet = pkgs.go-jsonnet.overrideAttrs (
+        old: {
+          subPackages = old.subPackages ++ [ "cmd/jsonnet-lint" ];
+        }
+      );
       inherit tools run;
       # Flake style attributes
       packages = tools // {

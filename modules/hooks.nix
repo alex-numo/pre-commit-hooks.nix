@@ -248,5 +248,26 @@ in
           entry = "${tools.html-tidy}/bin/tidy -quiet -errors";
           files = "\\.html$";
         };
+      jsonnet-fmt =
+        {
+          name = "jsonnet formatter";
+          description = "the standard jsonnet formatter";
+          entry = "${tools.jsonnet-fmt}/bin/jsonnet-fmt";
+          types = [ "jsonnet" ];
+        };
+      jsonnet-lint =
+        {
+          name = "jsonnet linter";
+          description = "the standard jsonnet linter";
+          entry = "${tools.jsonnet-lint}/bin/jsonnet-lint";
+          types = [ "jsonnet" ];
+        };
+      jsonnet-run =
+        {
+          name = "run jsonnet";
+          description = "tests jsonnet against files. useful for jsonnet acceptance tests.";
+          entry = "${tools.jsonnet-run}/bin/jsonnet-run";
+          types = [ "jsonnet" ];
+        };
     };
 }

@@ -23,10 +23,11 @@
 , nodePackages
 , hunspell
 , html-tidy
+, go-jsonnet
 }:
 
 {
-  inherit hlint shellcheck ormolu hindent cabal-fmt nixpkgs-fmt nixfmt nix-linter rustfmt clippy cargo html-tidy;
+  inherit hlint shellcheck ormolu hindent cabal-fmt nixpkgs-fmt nixfmt nix-linter rustfmt clippy cargo html-tidy go-jsonnet;
   inherit (elmPackages) elm-format elm-review elm-test;
   inherit (haskellPackages) stylish-haskell brittany hpack fourmolu;
   inherit (python39Packages) yamllint ansible-lint;
@@ -35,4 +36,7 @@
   terraform-fmt = callPackage ./terraform-fmt { };
   hpack-dir = callPackage ./hpack-dir { hpack = haskellPackages.hpack; };
   hunspell = callPackage ./hunspell { };
+  jsonnet-fmt = callPackage ./jsonnet-fmt { };
+  jsonnet-lint = callPackage ./jsonnet-lint { };
+  jsonnet-run = callPackage ./jsonnet-run { };
 }
